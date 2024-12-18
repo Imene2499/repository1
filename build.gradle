@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    //id("org.sonarqube") version "4.4.0.3356"
+    id 'maven-publish'
+    //id("io.github.oleksiiparf.slack-webhook") version "1.0.0"
+    //id 'de.zebrajaeger.sendMail' version("0.1.1")
+    //id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.25"
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:6.0.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.0.0'
+    testImplementation 'junit:junit:4.12'
+}
+
+
+
+publishing {
+    repositories {
+        maven {
+            url 'https://mymavenrepo.com/repo/ubmTK3Gf98AdDFwtcx8W/'
+            credentials {
+                username 'myMavenRepo'
+                password 'abcd'
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+
