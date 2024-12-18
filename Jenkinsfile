@@ -10,8 +10,6 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
-                            bat './gradlew build'
-
                 echo 'Testing..'
                 bat './gradlew check'
             }
