@@ -50,4 +50,12 @@ repositories {
     mavenCentral()
 }
 
+tasks.register('cucumberReport', Copy) {
+    description = 'Generate Cucumber HTML reports'
+    group = 'verification'
+
+    from(fileTree('build/reports/cucumber')) // Adjust path if reports are stored elsewhere
+    into(file('build/reports/cucumber'))
+}
+
 

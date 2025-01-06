@@ -20,7 +20,7 @@ pipeline {
                 archiveArtifacts artifacts: 'build/test-results/**/*.xml', allowEmptyArchive: true
             }
         }
-        /*stage('Generate Cucumber Reports') {
+        stage('Generate Cucumber Reports') {
             steps {
                 echo 'Generating Cucumber reports..'
                 bat './gradlew cucumberReport' // Replace this with your actual Gradle task for Cucumber reports
@@ -31,6 +31,6 @@ pipeline {
                     keepAll: true
                 ])
             }
-        }*/
+        }
     }
 }
