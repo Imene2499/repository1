@@ -28,7 +28,6 @@ pipeline {
                     reportDir: 'build/reports/cucumber',
                     reportFiles: 'index.html',
                     alwaysLinkToLastBuild: true,
-                    keepAll: true
                 ])
             }
         }
