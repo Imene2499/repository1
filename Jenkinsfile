@@ -24,11 +24,6 @@ pipeline {
             steps {
                 echo 'Generating Cucumber reports..'
                 bat './gradlew cucumberReport' // Replace this with your actual Gradle task for Cucumber reports
-                publishHTML(target: [
-                    reportDir: 'build/reports/cucumber',
-                    reportFiles: 'index.html',
-                    alwaysLinkToLastBuild: true,
-                ])
             }
         }
     }
