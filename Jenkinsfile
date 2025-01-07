@@ -23,7 +23,7 @@ pipeline {
         stage('Generate Cucumber Reports') {
             steps {
                 echo 'Generating Cucumber reports..'
-                bat './gradlew cucumberReport' // Replace this with your actual Gradle task for Cucumber reports
+                bat './gradlew generateCucumberReports' // Replace this with your actual Gradle task for Cucumber reports
             }
         }
     }
