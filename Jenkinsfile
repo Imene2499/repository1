@@ -2,28 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+
+        stage('Test') {
             steps {
-                echo 'Building..'
-                bat './gradlew build'
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                echo 'Running unit tests..'
+                echo 'Testing..'
                 bat './gradlew test'
-            }
-        }
-        stage('Archive Test Results') {
-            steps {
                 echo 'Archiving test results..'
                 archiveArtifacts artifacts: 'build/test-results/**/*.xml', allowEmptyArchive: true
-            }
-        }
-        stage('Generate Cucumber Reports') {
-            steps {
-                echo 'Generating Cucumber reports..'
-                bat './gradlew generateCucumberReports' // Replace this with your actual Gradle task for Cucumber reports
+                echo 'Generating reports..'
+                bat './gradlew generateCucumberReports'
             }
         }
 
@@ -42,6 +29,23 @@ pipeline {
                     // Wait for the SonarQube analysis to complete and check the quality gate status
                     waitForQualityGate abortPipeline: true  // If the gate fails, the pipeline will be aborted
                     }
+        }
+
+        stage('Build') {
+                     steps {
+                     echo 'Building Project..'
+                     bat './gradlew jar'
+                     bat './gradlew javadoc'
+                     echo 'Archiving Artifacts...'
+                     archiveArtifacts artifacts: '**/build/libs/TP5-1.0-SNAPSHOT.jar, **/build/tmp/javadoc/**/*', fingerprint: true
+                    }
+        }
+
+        stage('Deploy') {
+              steps {
+                  echo 'Deploying Project..'
+                  bat './gradlew publish'
+              }
         }
     }
 }
