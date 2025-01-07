@@ -95,7 +95,6 @@ sendMail {
 
 
 task sendFailureNotification {
-    doLast {
         slack {
             builtSucceed {
                 webHook = System.getenv('SLACK_WEBHOOK_URL')
@@ -115,8 +114,8 @@ task sendFailureNotification {
                 }
             }
         }
-    }
 }
+
 
 
 
