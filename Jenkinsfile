@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Test') {
             steps {
                 echo 'Testing..'
@@ -13,21 +14,8 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Test failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Test.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
+                    echo 'Test failed. Sending notification...'
+                    bat './gradlew sendFailureNotification'  // Remplacez par une tâche pour envoyer une notification en cas d'échec
                 }
             }
         }
@@ -41,21 +29,8 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Code analysis failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Code Analysis.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
+                    echo 'Code analysis failed. Sending notification...'
+                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
                 }
             }
         }
@@ -67,21 +42,8 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Quality Gate failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Quality Gate.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
+                    echo 'Quality Gate failed. Sending notification...'
+                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
                 }
             }
         }
@@ -96,21 +58,8 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Build failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Build.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
+                    echo 'Build failed. Sending notification...'
+                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
                 }
             }
         }
@@ -122,21 +71,8 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Deployment failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Deploy.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
+                    echo 'Deployment failed. Sending notification...'
+                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
                 }
             }
         }
@@ -148,25 +84,6 @@ pipeline {
 
                 echo 'Sending Notification via email..'
                 bat './gradlew sendMail'
-            }
-            post {
-                failure {
-                    echo 'Notification failed. Sending notification via email...'
-                    script {
-                        sendMail (
-                            subject: "Pipeline Failed: ${env.JOB_NAME}",
-                            body: """
-                                The Jenkins pipeline failed in the stage: Notification.
-
-                                Project: ${project.name}
-                                Build URL: ${env.BUILD_URL}
-                                Please check the logs for more details.
-                            """,
-                            to: "li_louni@esi.dz",  // Email to send notification
-                            from: "li_louni@esi.dz"  // Sender email
-                        )
-                    }
-                }
             }
         }
     }

@@ -94,6 +94,30 @@ sendMail {
 }
 
 
+task sendFailureNotification {
+    doLast {
+        slack {
+            builtSucceed {
+                webHook = System.getenv('SLACK_WEBHOOK_URL')
+                attachment {
+                    fallback = "Pipeline failed"
+                    pretext = "Pipeline failed in one of the stages"
+                    field {
+                        title = "Project"
+                        value = project.name
+                        shortValue = true
+                    }
+                    field {
+                        title = "Stage"
+                        value = "Test"  // Remplacez par la phase qui a échoué
+                        shortValue = true
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 
 
