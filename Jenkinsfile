@@ -30,22 +30,17 @@ pipeline {
         stage('Code Analysis') {
                     steps {
                         echo 'Analyzing code quality with SonarQube..'
-                        bat './gradlew sonarqube' // Runs the SonarQube analysis task
+                        withSonarQubeEnv('sonar') {
+                           bat './gradlew sonarqube'  // Execute SonarQube analysis
+                        }
                     }
         }
 
         stage('Quality Gate') {
-                    steps {
-                        script {
-                            // Wait for SonarQube Quality Gate result
-                            def qg = waitForQualityGate()  // This method waits for the SonarQube quality gate result
-                            if (qg.status != 'OK') {
-                                // If the Quality Gate is not OK, we stop the pipeline with a failure message
-                                error "Quality Gate failed! Exiting the pipeline."
-                            } else {
-                                echo "Quality Gate passed!"
-                            }
-                        }
+                steps {
+                    echo 'Waiting for SonarQube quality gate...'
+                    // Wait for the SonarQube analysis to complete and check the quality gate status
+                    waitForQualityGate abortPipeline: true  // If the gate fails, the pipeline will be aborted
                     }
         }
     }
