@@ -50,8 +50,11 @@ pipeline {
 
         stage('Notification') {
            steps {
-                echo 'Sending Notification..'
+                echo 'Sending Notification via slack..'
                 bat './gradlew postBuiltSucceedToSlack'
+
+                echo 'Sending Notification via email..'
+                bat './gradlew sendMail'
            }
         }
     }
