@@ -27,17 +27,11 @@ pipeline {
             }
         }
 
-        stage('Generate Cucumber Reports') {
+        stage('Code Analysis') {
                     steps {
-                        echo 'Generating Cucumber reports..'
-                        bat './gradlew generateCucumberReports' // Replace this with your actual Gradle task for Cucumber reports
+                        echo 'Analyzing code quality with SonarQube..'
+                        bat './gradlew sonarqube' // Runs the SonarQube analysis task
                     }
         }
-//         stage('Code Analysis') {
-//                     steps {
-//                         echo 'Analyzing code quality with SonarQube..'
-//                         bat './gradlew sonarqube' // Runs the SonarQube analysis task
-//                     }
-//         }
     }
 }
