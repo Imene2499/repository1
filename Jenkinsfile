@@ -51,7 +51,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Project..'
-                bat './gradlew ja'
+                bat './gradlew jar'
                 bat './gradlew javadoc'
                 echo 'Archiving Artifacts...'
                 archiveArtifacts artifacts: '**/build/libs/TP5-1.0-SNAPSHOT.jar, **/build/tmp/javadoc/**/*', fingerprint: true
@@ -82,8 +82,11 @@ pipeline {
                 echo 'Sending Notification via slack..'
                 bat './gradlew postBuiltSucceedToSlack'
 
-                echo 'Sending Notification via email..'
-                bat './gradlew sendMail'
+                 echo 'Sending Notification via email..'
+                    mail to: 'imenelouni2004@gmail.com',
+                         from: 'li_louni@esi.dz',
+                         subject: 'Project deployement Completed Successfully',
+                         body: 'The Project deployement has completed successfully.'
             }
         }
     }
