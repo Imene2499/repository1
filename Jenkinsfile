@@ -38,7 +38,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 echo 'Waiting for SonarQube quality gate...'
-                waitForQualityGate abortPipeline: true  // If the gate fails, the pipeline will be aborted
+                waitForQualityGate abortPipeline: true
             }
             post {
                 failure {
