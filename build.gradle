@@ -60,7 +60,7 @@ repositories {
 slack {
 
     builtSucceed {
-        webHook = "https://hooks.slack.com/services/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"
+        webHook = System.getenv('SLACK_WEBHOOK_URL')
         attachment {
             fallback = "Project successfully built."
             pretext = "Project successfully built."
