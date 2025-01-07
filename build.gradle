@@ -27,10 +27,10 @@ cucumberReports {
 
 sonarqube{
     properties {
-        property 'sonar.projectKey', 'your_project_key'
-        property 'sonar.projectName', 'your_project_name'
-        property 'sonar.host.url', 'http://localhost:9000'
-        property 'sonar.login', 'your_sonarqube_token' 
+        property 'sonar.projectKey', 'com.example.TP7Imene'
+        property 'sonar.projectName', 'TP7_Imene'
+        property 'sonar.host.url', 'http://197.140.142.82:9000/'
+        property 'sonar.login', '4779143396541ca69a1be4700e6f7aef69415492'
     }
 }
 
