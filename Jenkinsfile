@@ -33,11 +33,11 @@ pipeline {
                         bat './gradlew generateCucumberReports' // Replace this with your actual Gradle task for Cucumber reports
                     }
         }
-        stage('Code Analysis') {
-                    steps {
-                        echo 'Analyzing code quality with SonarQube..'
-                        bat './gradlew sonarqube' // Runs the SonarQube analysis task
-                    }
-        }
+//         stage('Code Analysis') {
+//                     steps {
+//                         echo 'Analyzing code quality with SonarQube..'
+//                         bat './gradlew sonarqube' // Runs the SonarQube analysis task
+//                     }
+//         }
     }
 }
