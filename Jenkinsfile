@@ -47,5 +47,12 @@ pipeline {
                   bat './gradlew publish'
               }
         }
+
+        stage('Notification') {
+           steps {
+                echo 'Sending Notification..'
+                sh './gradlew postBuiltSucceedToSlack'
+           }
+        }
     }
 }
