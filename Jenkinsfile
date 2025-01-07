@@ -35,7 +35,7 @@ pipeline {
         stage('Code Analysis') {
             steps {
                 echo 'Analyzing code quality with SonarQube..'
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonarqube') {
                     bat './gradlew sonarqube'  // Execute SonarQube analysis
                 }
             }
