@@ -58,7 +58,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Project..'
-                bat './gradlew ja'
+                bat './gradlew jar'
                 bat './gradlew javadoc'
                 echo 'Archiving Artifacts...'
                 archiveArtifacts artifacts: '**/build/libs/TP5-1.0-SNAPSHOT.jar, **/build/tmp/javadoc/**/*', fingerprint: true
