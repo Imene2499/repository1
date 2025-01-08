@@ -79,8 +79,8 @@ pipeline {
 
         stage('Notification') {
             steps {
-                echo 'Sending Notification via slack..'
-                bat './gradlew postBuiltSucceedToSlack'
+                echo 'Sending Notification via Slack..'
+                slackSend channel: '#all-esi', message: 'deploy completed'
 
                  echo 'Sending Notification via email..'
                     mail to: 'imenelouni2004@gmail.com',
