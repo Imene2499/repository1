@@ -79,6 +79,7 @@ slack {
 }
 
 
+
 sendMail {
     smtpServer {
         host "smtp.gmail.com"
@@ -93,6 +94,7 @@ sendMail {
     }
 }
 
+//comment
 
 task sendFailureNotification {
         slack {
