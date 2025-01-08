@@ -4,9 +4,6 @@ plugins {
     id("org.sonarqube") version "4.4.0.3356"
     id 'maven-publish'
     id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.25"
-    id("io.github.oleksiiparf.slack-webhook") version "1.0.0"
-    id 'de.zebrajaeger.sendMail' version("0.1.1")
-    //id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.25"
 }
 
 group = 'com.example'
@@ -55,42 +52,6 @@ publishing {
 }
 repositories {
     mavenCentral()
-}
-
-slack {
-
-    builtSucceed {
-        webHook = System.getenv('SLACK_WEBHOOK_URL')
-        attachment {
-            fallback = "Project successfully built."
-            pretext = "Project successfully built."
-            field {
-                title = "Module"
-                value = project.name
-                shortValue = true
-            }
-            field {
-                title = "Version"
-                value = project.version
-                shortValue = true
-            }
-        }
-    }
-}
-
-
-sendMail {
-    smtpServer {
-        host "smtp.gmail.com"
-        port 587
-        user "li_louni@esi.dz"
-        password "dbcn rvfo ibbz iisf"
-    }
-    mail {
-        from "li_louni@esi.dz"
-        to "li_louni@esi.dz"
-        body "Hello!!"
-    }
 }
 
 

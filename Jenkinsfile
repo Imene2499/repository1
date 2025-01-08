@@ -6,6 +6,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                bat './gradlew build'
                 bat './gradlew test'
                 echo 'Archiving test results..'
                 archiveArtifacts artifacts: 'build/test-results/**/*.xml', allowEmptyArchive: true
@@ -14,8 +15,11 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Test failed. Sending notification...'
-                    bat './gradlew sendFailureNotification'  // Remplacez par une tâche pour envoyer une notification en cas d'échec
+                mail to: 'imenelouni2004@gmail.com',
+                     from: 'li_louni@esi.dz',
+                     subject: 'Test failed',
+                     body: 'Test failed.'
+
                 }
             }
         }
@@ -29,8 +33,10 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Code analysis failed. Sending notification...'
-                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
+                    mail to: 'imenelouni2004@gmail.com',
+                         from: 'li_louni@esi.dz',
+                         subject: 'Code Analysis failed',
+                         body: 'Code Analysis failed.'
                 }
             }
         }
@@ -42,8 +48,10 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Quality Gate failed. Sending notification...'
-                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
+                    mail to: 'imenelouni2004@gmail.com',
+                         from: 'li_louni@esi.dz',
+                         subject: 'Quality Gate failed',
+                         body: 'Quality Gate failed.'
                 }
             }
         }
@@ -51,15 +59,17 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Project..'
-                bat './gradlew jar'
+                bat './gradlew ja'
                 bat './gradlew javadoc'
                 echo 'Archiving Artifacts...'
                 archiveArtifacts artifacts: '**/build/libs/TP5-1.0-SNAPSHOT.jar, **/build/tmp/javadoc/**/*', fingerprint: true
             }
             post {
                 failure {
-                    echo 'Build failed. Sending notification...'
-                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
+                   mail to: 'imenelouni2004@gmail.com',
+                        from: 'li_louni@esi.dz',
+                        subject: 'Build failed ',
+                        body: 'Build failed.'
                 }
             }
         }
@@ -71,8 +81,10 @@ pipeline {
             }
             post {
                 failure {
-                    echo 'Deployment failed. Sending notification...'
-                    bat './gradlew sendFailureNotification'  // Notification en cas d'échec
+                   mail to: 'imenelouni2004@gmail.com',
+                        from: 'li_louni@esi.dz',
+                        subject: 'Deployement failed',
+                        body: 'Deployement failed.'
                 }
             }
         }
