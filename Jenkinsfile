@@ -10,7 +10,7 @@ pipeline {
                 echo 'Archiving test results..'
                 archiveArtifacts artifacts: 'build/test-results/**/*.xml', allowEmptyArchive: true
                 echo 'Generating reports..'
-                bat './gradlew generateCucumberReports'
+                cucumber '**/reports/*.json'
             }
             post {
                 failure {
